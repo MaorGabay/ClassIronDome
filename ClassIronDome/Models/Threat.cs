@@ -6,7 +6,9 @@ namespace ClassIronDome.Models
 {
     public class Threat
     {
-
+        public Threat() { 
+            Status = THREAT_STATUS.Inactive;
+        }
 
 
         [Key]

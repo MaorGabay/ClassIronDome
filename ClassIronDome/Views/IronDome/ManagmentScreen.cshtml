@@ -1,0 +1,59 @@
+﻿@model List<ClassIronDome.Models.DefenceAmmunition>
+
+
+@{
+    ViewData["Title"] = "Managment Screen";
+    var errorMessage = TempData["ErrorMessage"];
+    var successMessage = TempData["SuccessMessage"];
+}
+
+<h1>Managment Screen</h1>
+
+<hr/>
+@if(errorMessage != null)
+{
+    <h3 class="text-warning ">
+        @errorMessage
+    </h3>
+}else if(successMessage != null)
+{
+    <h3 class="text-success alert-success">
+        @successMessage
+    </h3>
+}
+
+<div class="row">
+<div class="col-md-6">
+    <form asp-action="UpdateManagmentScreen" method="post">
+            @for(int i = 0; i<Model.Count; i++)
+            {
+                <input asp-for="@Model[i].Id" type="hidden" />
+                <div class="d-flex gap-3 mt-2">
+                    <p class="my-auto">@Model[i].Name</p>
+                    <div class="form-group">
+                        <input asp-for="@Model[i].Amount"  class="form-control"/>
+                    </div>
+                </div>
+            }
+            <div class="form-group mt-3"> 
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </form>
+</div>
+
+</div>
+@section Scripts {
+   <script>
+       setTimeout(() => {
+
+            const warningMessage = document.querySelector(".text-warning");
+            const sucsessMessage = document.querySelector(".text-success");
+           if (warningMessage) {
+                warningMessage.remove()
+           }
+            if (sucsessMessage) {
+                sucsessMessage.remove()
+           }
+       },3000) 
+   </script>
+}

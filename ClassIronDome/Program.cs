@@ -1,10 +1,14 @@
+using ClassIronDome.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 // TODO: Add a service for db
-
+string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<IronDomeDbContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
@@ -25,6 +29,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=IronDome}/{action=ManagmentScreen}/{id?}");
 
 app.Run();
